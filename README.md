@@ -9,6 +9,8 @@
 - Improved the overall organization of my code into hooks, utils, and better shared components
 - Added e2e tests
 - Improved the overall UI
+- Use newer React 19 features, such as use() with Suspense for aysnc fetching, transitions, etc. I didn't feel confident yet to try using those in an assessment.
+
 
 # 🧩 Frontend Take-Home Task — Member Management Panel
 
