@@ -1,4 +1,4 @@
-import type { MemberSex, MemberStatus } from "../../lib/members/type";
+import type { MemberSex, MemberStatus } from "../../../lib/members/type";
 
 export interface MemberFormData {
   firstName: string;

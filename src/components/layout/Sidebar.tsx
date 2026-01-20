@@ -14,9 +14,7 @@ import {
 } from "@mui/material";
 import PeopleIcon from "@mui/icons-material/People";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-
-const DRAWER_WIDTH_EXPANDED = 220;
-const DRAWER_WIDTH_COLLAPSED = 64;
+import { DRAWER_WIDTH_COLLAPSED, DRAWER_WIDTH_EXPANDED } from "./constants";
 
 interface NavItem {
   label: string;
@@ -131,5 +129,3 @@ export const Sidebar = () => {
     </Drawer>
   );
 };
-
-export { DRAWER_WIDTH_EXPANDED, DRAWER_WIDTH_COLLAPSED };

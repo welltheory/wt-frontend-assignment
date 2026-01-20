@@ -1,10 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
-import {
-  Sidebar,
-  DRAWER_WIDTH_COLLAPSED,
-  DRAWER_WIDTH_EXPANDED,
-} from "./Sidebar";
+import { Sidebar } from "./Sidebar";
+import { DRAWER_WIDTH_COLLAPSED, DRAWER_WIDTH_EXPANDED } from "./constants";
 
 export const Layout = () => {
   const theme = useTheme();

@@ -20,11 +20,6 @@ interface MembersListContextType {
   setPaginationModel: (model: PaginationModel) => void;
 }
 
-const defaultPaginationModel: PaginationModel = {
-  page: 0, // DataGrid uses 0-indexed pages
-  pageSize: DEFAULT_PAGE_SIZE,
-};
-
 const MembersListContext = createContext<MembersListContextType | undefined>(
   undefined,
 );
@@ -34,9 +29,10 @@ export const MembersListContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [paginationModel, setPaginationModelState] = useState<PaginationModel>(
-    defaultPaginationModel,
-  );
+  const [paginationModel, setPaginationModelState] = useState<PaginationModel>({
+    page: 0, // DataGrid uses 0-indexed pages
+    pageSize: DEFAULT_PAGE_SIZE,
+  });
 
   const setPaginationModel = useCallback((model: PaginationModel) => {
     // Validate pageSize against allowed options
