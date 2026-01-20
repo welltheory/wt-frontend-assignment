@@ -1,4 +1,4 @@
-import type { MemberFormData } from "../../components/memberForm/types";
+import type { MemberFormData } from "../../components/member/memberForm/types";
 import type { Member } from "../members/type";
 import { apiConfig } from "./config";
 import { HttpMethod } from "./types";
@@ -86,20 +86,20 @@ export const deleteMemberById = async ({ id }: { id: string }) => {
   return _apiFetch({ path: `/members/${id}`, method: HttpMethod.Delete });
 };
 
-const _apiFetch = async ({
+const _apiFetch = async <T extends object>({
   path,
   method,
   body,
-  isMultipart,
+  isMultipart = false,
 }: {
   path: string;
   method: HttpMethod;
-  body?: Record<string, unknown> | FormData;
-  isMultipart: boolean;
+  body?: T;
+  isMultipart?: boolean;
 }) => {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
 
-  const headers = { ...API_HEADERS };
+  const headers: Record<string, string> = { ...API_HEADERS };
   if (isMultipart) {
     delete headers["content-type"];
   }
@@ -117,14 +117,14 @@ const _apiFetch = async ({
   return response.json();
 };
 
-const _prepareRequestBody = ({
+const _prepareRequestBody = <T extends object>({
   body,
   isMultipart,
 }: {
-  body?: Record<string, unknown> | FormData;
+  body?: T;
   isMultipart: boolean;
-}) => {
-  if (isMultipart) {
+}): BodyInit | undefined => {
+  if (isMultipart && body instanceof FormData) {
     return body;
   }
   return body ? JSON.stringify(body) : undefined;

@@ -5,6 +5,7 @@ import { Home } from "./pages/Home";
 import { Layout } from "./components/layout/Layout";
 import { MemberDetails } from "./pages/MemberDetails";
 import { AddMember } from "./pages/AddMember";
+import { MembersListContextProvider } from "./context/MembersListContext";
 
 const theme = createTheme({
   palette: {
@@ -22,16 +23,18 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="/members/:id" element={<MemberDetails />} />
-            <Route path="/add-member" element={<AddMember />} />
-          </Route>
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </BrowserRouter>
+      <MembersListContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="/members/:id" element={<MemberDetails />} />
+              <Route path="/add-member" element={<AddMember />} />
+            </Route>
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </BrowserRouter>
+      </MembersListContextProvider>
     </ThemeProvider>
   );
 }

@@ -2,25 +2,28 @@ import { useParams } from "react-router-dom";
 import useSWR from "swr";
 import { type Member } from "../lib/members/type";
 import { getMemberById, updateMemberBydId } from "../lib/api/fetch";
+import { useMemberSwrSyncer } from "../lib/members/hooks/useMemberSwrSyncer";
 
 import { useCallback, useState } from "react";
 
 import { PageHeader } from "../components/PageHeader";
 
-import type { MemberFormData } from "../components/memberForm/types";
+import type { MemberFormData } from "../components/member/memberForm/types";
 import { MemberDetailsContent } from "../components/memberDetailsPage/MemberDetailsContent";
-import { MemberForm } from "../components/memberForm/MemberForm";
+import { MemberForm } from "../components/member/memberForm/MemberForm";
+import { Alert, Snackbar } from "@mui/material";
 
 export const MemberDetails = () => {
   const [isEditing, setIsEditing] = useState(false);
+  const [showSuccessSnackbar, setShowSuccessSnackbar] = useState(false);
 
   const { id } = useParams<{ id: string }>();
+  const { syncMember } = useMemberSwrSyncer();
   const {
     data: member,
     isLoading,
     error,
-    mutate: reload,
-  } = useSWR<Member | null>(id ? `/members/${id}` : null, () =>
+  } = useSWR<Member | null>(id ? ["member", id] : null, () =>
     getMemberById({ id: id! }),
   );
 
@@ -34,14 +37,26 @@ export const MemberDetails = () => {
 
   const onSubmitEdit = useCallback(
     async (data: MemberFormData) => {
-      return updateMemberBydId({ id: id!, data });
+      const updatedMember = await updateMemberBydId({ id: id!, data });
+      syncMember(updatedMember);
+      setIsEditing(false);
+      setShowSuccessSnackbar(true);
     },
-    [id],
+    [id, syncMember],
   );
 
-  const onAvatarUpdated = useCallback(() => {
-    reload();
-  }, [reload]);
+  const onCloseSnackbar = useCallback(() => {
+    setShowSuccessSnackbar(false);
+  }, []);
+
+  const onAvatarUpdated = useCallback(
+    (photoUrl: string) => {
+      if (member) {
+        syncMember({ ...member, photoUrl });
+      }
+    },
+    [syncMember, member],
+  );
 
   if (error) {
     return <div>Failed to load that member ...</div>;
@@ -66,6 +81,22 @@ export const MemberDetails = () => {
       ) : (
         <MemberDetailsContent {...{ member, onEdit, onAvatarUpdated }} />
       )}
+
+      <Snackbar
+        open={showSuccessSnackbar}
+        autoHideDuration={4000}
+        onClose={onCloseSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={onCloseSnackbar}
+          severity="success"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          Member updated successfully!
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

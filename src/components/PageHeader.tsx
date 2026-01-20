@@ -7,8 +7,8 @@ export const PageHeader = ({
 }) => {
   return (
     <div>
-      <h2>{title}</h2>
-      {subtitle && <p>{subtitle}</p>}
+      <h2 data-testid="page-header-title">{title}</h2>
+      {subtitle && <p data-testid="page-header-subtitle">{subtitle}</p>}
     </div>
   );
 };

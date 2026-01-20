@@ -11,18 +11,6 @@
 - Improved the overall UI
 - Use newer React 19 features, such as use() with Suspense for aysnc fetching, transitions, etc. I didn't feel confident yet to try using those in an assessment.
 
-#### Any assumptions you made:
-I assumed that the API key was as much authentication as I needed, so I didn't build an auth flow.
-
-#### How you approached data fetching and state management
-* I used SWR (stale while revalidate) HTTP protocol to handle loading the data, caching it, and keeping it up to date when the user left a page and returned.
-* I used simple state managment flags with useState() and useRef()
-
-#### Any trade-offs or shortcuts you took
-* I realized I was spending too much time on the layout and look of the pages, so I abandoned that in an effort to not go way over the 3 hours.
-* I didn't have time to worry about the typescript and lint errors, so the code doesn't look as readable as I would like.
-* I used MUI wherever I could. I don't use MUI often in my career, so it was still a little time-consuming to remember how to do basic features with it.
-
 # 🧩 Frontend Take-Home Task — Member Management Panel
 
 Welcome to the **Senior Frontend Engineer** take-home assignment.
