@@ -35,6 +35,7 @@ yarn dev
 
 3. You will be provided with an **API key** before starting.  
    Use the same key consistently for all API requests — **it is what connects the data on the backend to you.**
+4. The API has a **database replica lag with eventual consistency** - immediate refetches of data after a mutation may not reflect the correct database state. Make sure to handle this accordingly.
 
 The project is already set up with React, TypeScript, React Router, Material UI, styled-components and Vite.  
 You may install other libraries or tools if you believe they improve your solution.
