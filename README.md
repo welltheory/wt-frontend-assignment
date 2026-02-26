@@ -318,7 +318,7 @@ All fields are optional; at least one must be provided.
 
 ## 🚀 Submission
 
-1. Push your fork to your GitHub account.  
+1. Push your fork to your GitHub account. Alternatively, you can also send us a zip file of the project with your changes included. If you do decide to send a zip, please still commit the files as you normally would to Git locally and include the .git directory.
 2. Ensure the app runs locally with:
 
 ```bash
