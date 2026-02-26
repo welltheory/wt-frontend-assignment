@@ -8,7 +8,7 @@ This task focuses on functionality, architecture, and reasoning — **we will no
 
 To start, please fork this repository. Any work you do should be committed to that repo. Once you're done, share the link to your repo with the finalized code with us. Please make sure that we have sufficient permissions to view the repository.
 
-We expect you to spend a maximum of 3 hours on this task. Please record your screen while you work on the assignment. Voiceover explaining your thought process is welcome, but not required.
+We expect you to work on this assignment for around 3 hours. If you complete all of the functionalities before that, please use the remaining period to improve the solution as you see fit. We expect the solution to be as close to production-ready code as possible - consider this as an actual product that users will use and other engineers will have to work on in the future. Please record your screen while you work on the assignment. Voiceover explaining your thought process is welcome, but not required.
 ---
 
 ## 🎯 Task Overview
@@ -38,7 +38,7 @@ yarn dev
 4. The API has a **database replica lag with eventual consistency** - immediate refetches of data after a mutation may not reflect the correct database state. Make sure to handle this accordingly.
 
 The project is already set up with React, TypeScript, React Router, Material UI, styled-components and Vite.  
-You may install other libraries or tools if you believe they improve your solution.
+You are welcome to install other libraries or tools if you believe they improve your solution.
 
 ---
 
